@@ -1,0 +1,38 @@
+  <h6 className='mb-4 fw-light'>Showing {filteredProducts.length} Products</h6>
+            <div className="row">
+                {filteredProducts && filteredProducts.length > 0 ? (
+                    filteredProducts.map((product) => (
+                        <div className="col-md-4 mb-4" key={product._id}>
+                            <Link className='text-decoration-none' to={`/products/product/${product._id}`} state={product}>
+                                <div className="card mb-2" style={{ width: "19rem", border: "none" }}>
+                                    <img
+                                        src={product.imageUrl}
+                                        className="card-img-top"
+                                        alt={product.name}
+                                        style={{ height: "18rem", objectFit: "cover" }}
+                                    />
+                                    <div className="card-body text-center">
+                                        <p className="card-text">
+                                            {product.name} <br />
+                                            <span className='fs-5 fw-bold'>₹ {product.price}</span>
+                                        </p>
+                                    </div>
+                                </div>
+                            </Link>
+
+                            {/* Add to Cart Button */}
+                            <div className='text-center' style={{ width: '310px' }}>
+                                <button
+                                    className='btn btn-success'
+                                    onClick={() => handleAddToCart(product._id)}
+                                >
+                                    Add to Cart
+                                </button>
+                                <button className='btn btn-dark mx-1' onClick={() => handleAddToWishlist(product._id)}>Wishlist</button>
+                            </div>
+                        </div>
+                    ))
+                ) : (
+                    <div>No products available</div>
+                )}
+            </div>

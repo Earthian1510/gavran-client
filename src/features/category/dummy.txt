@@ -1,0 +1,77 @@
+/**
+
+<div className="my-3">
+            {status === 'loading' && (
+                <div className="fs-1 text-center" style={{ fontFamily: 'DM Serif Text, serif' }}>
+                    Welcome to Our Website
+                </div>
+            )}
+            {error && (
+                <div className="fs-1 text-center" style={{ fontFamily: 'DM Serif Text, serif' }}>
+                    Shop with our Super Farmers
+                </div>
+            )}
+            {categories && (
+                <div id="categoryCarousel" className="carousel slide" data-bs-ride="carousel">
+                    <div className="carousel-inner">
+                        {carousalCategories.map((chunk, index) => (
+                            <div
+                                key={index}
+                                className={`carousel-item ${index === 0 ? 'active' : ''}`}>
+                                <div className="row">
+                                    {chunk.map((cat) => (
+                                        <div key={cat._id} className="col-6 col-md-3 mb-3">
+                                            <Link to={`/products/category/${cat.name}`} className="text-decoration-none">
+                                                <div className="text-center">
+                                                    <img
+                                                        src={cat.imageUrl}
+                                                        className="img-fluid rounded"
+                                                        alt={cat.name}
+                                                        style={{
+                                                            height: '130px',
+                                                            width: '100%',
+                                                            objectFit: 'cover',
+                                                        }}
+                                                    />
+                                                    <div
+                                                        style={{
+                                                            color: 'white',
+                                                            fontSize: '1.2rem',
+                                                            fontWeight: 'bold',
+                                                            marginTop: '-0.1rem',
+                                                            background: 'black',
+                                                            paddingBlock: '0.2rem'
+                                                        }}>
+                                                        {cat.name}
+                                                    </div>
+                                                </div>
+                                            </Link>
+                                        </div>
+                                    ))}
+                                </div>
+                            </div>
+                        ))}
+                    </div>
+                    <button
+                         style={{width: '2%'}}
+                        className="carousel-control-prev"
+                        type="button"
+                        data-bs-target="#categoryCarousel"
+                        data-bs-slide="prev">
+                        <span className="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span className="visually-hidden">Previous</span>
+                    </button>
+                    <button
+                        style={{width: '2%'}}
+                        className="carousel-control-next"
+                        type="button"
+                        data-bs-target="#categoryCarousel"
+                        data-bs-slide="next">
+                        <span className="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span className="visually-hidden">Next</span>
+                    </button>
+                </div>
+            )}
+        </div>
+                
+ */
