@@ -6,7 +6,7 @@ import axios from "axios";
 const TOKEN = localStorage.getItem('token')
 const headers = {
     'Content-Type': 'application/json',
-    'Authorization': `Bearer ${TOKEN}`
+    'Authorization': TOKEN ? `Bearer ${TOKEN}` : ''
 };
 
 export const fetchUserInfo = createAsyncThunk(
@@ -60,7 +60,7 @@ const userSlice = createSlice({
         })
         builder.addCase(fetchUserInfo.rejected, (state, action) => {
             state.status = 'error';
-            state.error = action.payload.message
+            state.error = action.payload
         })
         builder.addCase(updateUserInfo.fulfilled, (state, action) => {
             console.log(action.payload)

@@ -33,15 +33,15 @@ const OrderListing = () => {
             {
                 allOrders
                     ?
-                    <div>
+                    <div className='d-flex flex-column-reverse'>
                         {
                             allOrders?.map((order) => (
-                                <div key={order._id} className='card p-3' style={{ display: 'flex'}} >
+                                <div key={order._id} className='card p-3 mb-2' style={{ display: 'flex'}} >
                                     <div style={{ display: 'flex' }} className=''>
                                         {
                                             order.orderInfo?.map((product) => (
-                                                <div className='' >
-                                                    <img src={`${product.productId.imageUrl}`} style={{ height: '80px' }} />
+                                                <div className='mx-1' >
+                                                    <img src={`${product.productId.imageUrl}`} style={{ height: '80px', borderRadius: '4px' }} />
                                                         <p className='text-center' style={{ fontFamily: 'DM Serif Text, serif' }}>
                                                             {product.productId.name}
                                                             <br />

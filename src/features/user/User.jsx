@@ -175,7 +175,9 @@ const User = () => {
 
           </div>
           <div className="col-md-6">
-            <OrderListing />
+            {
+              status == 'success' && <OrderListing />
+            }
           </div>
         </div>
       </div>
