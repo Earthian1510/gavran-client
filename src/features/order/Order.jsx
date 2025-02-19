@@ -7,11 +7,13 @@ import { fetchAllAddresses, deleteAddress } from '../address/addressSlice'
 import { decodeToken } from '../../utils/decodeToken'
 import AddressForm from '../address/AddressForm'
 import { createOrder } from './orderSlice'
+import { clearUserCart } from '../cart/cartSlice'
 
 const Order = () => {
 
     const dispatch = useDispatch()
     const navigate = useNavigate()
+    const location = useLocation()
 
     const [msg, setMsg] = useState('')
     const [showMsg, setShowMsg] = useState(false)
@@ -22,9 +24,9 @@ const Order = () => {
 
     const [shippingAddress, setShippingAddress] = useState(null);
 
-    const { state } = useLocation()
-    const orderedItems = state;
-
+    const orderedItems = location.state;
+    
+    console.log(orderedItems)
     useEffect(() => {
         dispatch(fetchAllAddresses(userId))
     }, [])
@@ -72,12 +74,13 @@ const Order = () => {
 
         dispatch(createOrder({userId, newOrder}))
         .then(() => {
+            dispatch(clearUserCart(userId))
             setMsg('Order placed successfully.');
             setShowMsg(true)
             setTimeout(() => {
                 setMsg('');
                 setShowMsg(false)
-            }, 1200)
+            }, 3000)
             navigate('/user')
         })
         .catch((error) => {
