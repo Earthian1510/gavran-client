@@ -34,8 +34,8 @@ const Cart = () => {
 
   const handleAddToWishlist = (productId) => {
     dispatch(removeFromCart({ userId, productId }))
-    .then(() => {
-      dispatch(addToWishlist({ userId, productId }))
+      .then(() => {
+        dispatch(addToWishlist({ userId, productId }))
       })
       .then(() => {
         setMsg("Product moved to wishlist!");
@@ -115,7 +115,7 @@ const Cart = () => {
                                 <h4 className='fw-bold mb-0' style={{ fontFamily: "DM Serif Text, serif" }}>
                                   ₹ {product.productId.price_per_kg || product.productId.price} <span style={{ fontSize: '1rem', fontWeight: '400' }}>/Kg</span>
                                 </h4>
-                                <div className='d-flex justify-content-between align-items-center' style={{ paddingRight: '20px'}}>
+                                <div className='d-flex justify-content-between align-items-center' style={{ paddingRight: '20px' }}>
                                   <div>
                                     Quantity:
 
@@ -124,7 +124,7 @@ const Cart = () => {
                                     <button style={{ marginInline: '5px', cursor: 'pointer' }} className='btn p-0' onClick={() => handleIncreaseQuantity(product.productId._id)}><i className="bi bi-plus-square" style={{ fontSize: '20px' }} ></i></button>
 
                                   </div>
-                                  <div className='d-flex mt-1' style={{ height: '32px'}}>
+                                  <div className='d-flex mt-1' style={{ height: '32px' }}>
                                     <button className='btn btn-sm btn-dark' onClick={() => handleRemoveFromCart(product.productId._id)}>
                                       Remove
                                     </button>
@@ -145,53 +145,53 @@ const Cart = () => {
                 </div>
 
               )}
-            {
-              (status === 'success' && items.length == 0) && <div>Cart is empty</div>
-            }
+            
             {
               error && <div className='alert alert-danger'>Error occured, Please try again later!</div>
             }
-          
-          <div className='mt-2'>
-            {
-             (status == 'success' && items?.length > 0)
-              && (
-              <div className="card p-3">
-                <h5 className='fw-bold'>Price Details</h5>
-                <table className='table table-borderless' style={{ borderTop: '1px solid gray' }}>
-                  <tbody>
-                    <tr style={{ borderBottom: '1px solid' }}>
-                      <td> Total Price ({items.length} items)</td>
-                      <td>₹ {totalProductPrice}</td>
-                    </tr>
-                    <tr className='py-0'>
-                      <td>Delivery Charges</td>
-                      <td>₹ {deliveryCharge.toFixed(2)}</td>
-                    </tr>
-                    <tr className='fw-bold' style={{ borderBlock: '1px solid gray' }}>
-                      <td>Cart Total</td>
-                      <td>₹ {(totalProductPrice + deliveryCharge).toFixed(2)}</td>
-                    </tr>
-                  </tbody>
-                </table>
 
-                {/* <UserAddress setSelectedAddress={setSelectedAddress} /> */}
-                
-                <Link className='btn btn-success' to='/order' state={items}>Next</Link>
-              </div>
-            )}
+            <div className='mt-2'>
+              {
+                (status == 'success' && items?.length > 0)
+                && (
+                  <div className="card p-3">
+                    <h5 className='fw-bold'>Price Details</h5>
+                    <table className='table table-borderless' style={{ borderTop: '1px solid gray' }}>
+                      <tbody>
+                        <tr style={{ borderBottom: '1px solid' }}>
+                          <td> Total Price ({items.length} items)</td>
+                          <td>₹ {totalProductPrice}</td>
+                        </tr>
+                        <tr className='py-0'>
+                          <td>Delivery Charges</td>
+                          <td>₹ {deliveryCharge.toFixed(2)}</td>
+                        </tr>
+                        <tr className='fw-bold' style={{ borderBlock: '1px solid gray' }}>
+                          <td>Cart Total</td>
+                          <td>₹ {(totalProductPrice + deliveryCharge).toFixed(2)}</td>
+                        </tr>
+                      </tbody>
+                    </table>
 
-            </div>
-          
-          </div>
+                    {/* <UserAddress setSelectedAddress={setSelectedAddress} /> */}
 
-          <div className="col-md-4">
-            <div className=''>
-           
+                    <Link className='btn btn-success' to='/order' state={items}>Next</Link>
+                  </div>
+                )}
 
             </div>
 
           </div>
+
+          {
+            (status == 'success' && items.length == 0)
+            &&
+            <div className='text-center' style={{ fontFamily: 'DM Serif Text, serif', marginBlock: '2rem' }}>
+              <h4 >Your Cart is empty!</h4>
+
+              <Link to={`/`}>Add products to cart</Link>
+            </div>
+          }
         </div>
 
       </div>
