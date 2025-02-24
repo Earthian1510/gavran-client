@@ -17,6 +17,10 @@ const Cart = () => {
   const [showMsg, setShowMsg] = useState(false);
 
   const userId = decodeToken();
+  if(!userId){
+    console.error("User is not logged in!")
+    navigate('/login')
+  }
 
   const { items, status, error } = useSelector((state) => state.cart);
 
@@ -63,7 +67,7 @@ const Cart = () => {
     dispatch(clearUserCart(userId));
   };
 
-  const totalProductPrice = items.reduce((acc, product) => acc + (product.productId.price_per_kg * product.quantity), 0);
+  const totalProductPrice = (items ?? []).reduce((acc, product) => acc + (product.productId.price_per_kg * product.quantity), 0);
   const deliveryCharge = totalProductPrice * 0.20;
 
   return (
@@ -78,8 +82,6 @@ const Cart = () => {
             {
               showMsg && <Modal show={showMsg} message={msg} />
             }
-
-
             {
               status == 'loading' && <div className='alert alert-warning mt-2'>Loading...</div>
             }

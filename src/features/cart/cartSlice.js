@@ -2,10 +2,9 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 import { API } from "../../api"
 
-const TOKEN = localStorage.getItem('token')
 const headers = {
     'Content-Type': 'application/json',
-    'Authorization': `Bearer ${TOKEN}`
+    'Authorization': `Bearer ${localStorage.getItem('token')}`
 };
 
 export const fetchCart = createAsyncThunk(
@@ -29,7 +28,7 @@ export const addToCart = createAsyncThunk(
             const response = await axios.post(`${API.cart}/${userId}/items`, product, { headers });
             const items = response.data.updatedCart.items;
 
-            const lastItem = items[items.length - 1];
+            const lastItem = items.length > 0 ? items[items.length - 1] : null;
             return lastItem;
         }
         catch (error) {
@@ -148,8 +147,9 @@ const cartSlice = createSlice({
 
         builder.addCase(removeFromCart.fulfilled, (state, action) => {
             const findItem = state.items.findIndex((item) => item.productId._id == action.payload)
-            console.log(findItem)
-            state.items.splice(findItem, 1)
+            if( findItem!== -1){
+                state.items.splice(findItem, 1)
+            }
         })
 
         builder.addCase(clearUserCart.fulfilled, (state, action) => {

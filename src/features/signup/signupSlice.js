@@ -20,7 +20,17 @@ const signupSlice = createSlice({
     },
     reducers: {},
     extraReducers: (builder) => {
-       
+       builder.addCase(signupUser.pending, (state) => {
+        state.status = 'loading';
+       })
+       builder.addCase(signupUser.fulfilled, (state, action) => {
+        state.status = 'success';
+        state.message = action.payload;
+       })
+       builder.addCase(signupUser.rejected, (state, action) => {
+        state.status = 'error';
+        state.error = action.payload
+       })
     }
 });
 
