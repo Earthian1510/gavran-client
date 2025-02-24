@@ -186,7 +186,8 @@ const Cart = () => {
           </div>
 
           {
-            (status == 'success' && items.length == 0)
+            // (status == 'success' && items.length == 0)
+            status == 'success'
             &&
             <div className='text-center' style={{ fontFamily: 'DM Serif Text, serif', marginBlock: '2rem' }}>
               <h4 >Your Cart is empty!</h4>

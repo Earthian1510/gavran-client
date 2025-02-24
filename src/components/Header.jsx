@@ -2,12 +2,14 @@ import React, { useState } from 'react'
 import { Link, NavLink, useNavigate } from 'react-router-dom'
 import { setSearchQuery } from '../features/products/filterSlice'
 import { useDispatch } from 'react-redux'
+import { decodeToken } from '../utils/decodeToken'
 
 
 const Header = () => {
     const [search, setSearch] = useState('');
     const dispatch = useDispatch()
     const navigate = useNavigate()
+    const userId = decodeToken()
 
     const handleSearchSubmit = (e) => {
         e.preventDefault()
@@ -60,11 +62,15 @@ const Header = () => {
                                     <i className="bi bi-cart4" style={{ fontSize: '20px' }}></i>
                                 </NavLink>
                             </li>
-                            <li className='nav-item'>
-                                <NavLink className='nav-link' onClick={handleLogout}>
-                                <i className="bi bi-box-arrow-right" style={{ fontSize: '20px', color: 'black' }}></i>
-                                </NavLink>
-                            </li>
+                            {
+                                userId
+                                &&
+                                <li className='nav-item'>
+                                    <NavLink className='nav-link' onClick={handleLogout}>
+                                        <i className="bi bi-box-arrow-right" style={{ fontSize: '20px', color: 'black' }}></i>
+                                    </NavLink>
+                                </li> 
+                            }
                         </ul>
                     </div>
                 </div>
