@@ -13,7 +13,7 @@ export const fetchWishlist = createAsyncThunk(
     async (userId) => {
         try {
             const response = await axios.get(`${API.wishlist}/${userId}`, { headers });
-            return response.data;
+            return response.data.products;
         }
         catch (error) {
             console.error(error);
@@ -63,7 +63,7 @@ const wishlistSlice = createSlice({
         })
         builder.addCase(fetchWishlist.fulfilled, (state, action) => {
             state.status = 'success',
-            state.products = action.payload.products;
+            state.products = action.payload;
         })
         builder.addCase(fetchWishlist.rejected, (state, action) => {
             state.status = 'error',
@@ -72,7 +72,6 @@ const wishlistSlice = createSlice({
 
         builder.addCase(addToWishlist.fulfilled, (state, action) => {
             state.products.push(action.payload); 
-          
         })
         builder.addCase(removeFromWishlist.fulfilled, (state, action) => {
             const removedProduct = state.products.findIndex((product) => product._id === action.payload)
