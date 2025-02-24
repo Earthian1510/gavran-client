@@ -7,8 +7,6 @@ const OrderInvoice = () => {
   const order = location.state?.order 
 
   const { id } = useParams()
-  console.log(order)
-
   const totalAmount = order?.orderInfo?.reduce(
     (acc, curr) => acc + curr.productId.price_per_kg * curr.quantity,
     0

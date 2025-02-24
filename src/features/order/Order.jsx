@@ -25,8 +25,7 @@ const Order = () => {
     const [shippingAddress, setShippingAddress] = useState(null);
 
     const orderedItems = location.state;
-    
-    console.log(orderedItems)
+
     useEffect(() => {
         dispatch(fetchAllAddresses(userId))
     }, [])
@@ -69,8 +68,6 @@ const Order = () => {
             shippingAddress: shippingAddress,
             orderInfo: orderedItems
         }
-
-        console.log(newOrder)
 
         dispatch(createOrder({userId, newOrder}))
         .then(() => {
