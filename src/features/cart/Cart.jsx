@@ -191,7 +191,7 @@ const Cart = () => {
             <div className='text-center' style={{ fontFamily: 'DM Serif Text, serif', marginBlock: '2rem' }}>
               <h4 >Your Cart is empty!</h4>
 
-              <Link to={`/`}>Add products to cart</Link>
+              <Link to={`/products`}>Add products to cart</Link>
             </div>
           }
         </div>

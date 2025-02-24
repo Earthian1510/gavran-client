@@ -107,7 +107,7 @@ const Wishlist = () => {
             <div className='text-center' style={{ fontFamily: 'DM Serif Text, serif', marginBlock: '2rem'}}>
               <h4 >Your wishlist is empty!</h4>
               
-              <Link to={`/`}>Add products to wishlist</Link>
+              <Link to={`/products`}>Add products to wishlist</Link>
             </div>
           }
         </div>
